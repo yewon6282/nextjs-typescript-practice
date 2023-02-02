@@ -1,10 +1,10 @@
-import { toDoList } from "@/pages";
+import { toDoList } from "@/store/listState";
 import { Dispatch, SetStateAction } from "react";
 
-type propsList = {
+interface propsList {
   data: toDoList;
   setList: Dispatch<SetStateAction<toDoList[]>>;
-};
+}
 
 const ShowList = (props: propsList) => {
   const deleteValue = (): any => {

@@ -1,15 +1,12 @@
 import ShowList from "@/components/ShowList";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { listState } from "@/store/listState";
 
-export type toDoList = {
-  index: number;
-  value: string;
-};
-
-export default function Home() {
+const Home = () => {
   const [value, setValue] = useState<string>("");
   const [countIndex, setCountIndex] = useState<number>(0);
-  const [list, setList] = useState<toDoList[]>([]);
+  const [list, setList] = useRecoilState(listState);
 
   const inputValue = (e: string): any => {
     setValue(e);
@@ -27,12 +24,15 @@ export default function Home() {
       <button onClick={addValue}>입력</button>
 
       <ul>
-        {list.map((el) => (
-          <li key={el.index}>
-            <ShowList data={el} setList={setList} />
-          </li>
-        ))}
+        {list.length > 0 &&
+          list.map((el) => (
+            <li key={el.index}>
+              <ShowList data={el} setList={setList} />
+            </li>
+          ))}
       </ul>
     </div>
   );
-}
+};
+
+export default Home;
