@@ -8,20 +8,24 @@ const Home = () => {
   const [countIndex, setCountIndex] = useState<number>(0);
   const [list, setList] = useRecoilState(listState);
 
-  const inputValue = (e: string): any => {
+  const inputValue = (e: string): void => {
     setValue(e);
   };
 
-  const addValue = (): any => {
+  const addValue = (): void => {
     setList([...list, { index: countIndex, value: value }]);
     setCountIndex(countIndex + 1);
     setValue("");
   };
 
   return (
-    <div>
-      <input type="text" onChange={(e) => inputValue(e.target.value)} value={value || ""}></input>
-      <button onClick={addValue}>입력</button>
+    <div className="w-80 border-solid border-2 border-black">
+      <div className="w-full">
+        <input type="text" className="w-4/5 border-solid border-2 border-sky-500 rounded-lg p-2" onChange={(e) => inputValue(e.target.value)} value={value || ""}></input>
+        <button className="w-1/5 rounded-lg p-2" onClick={addValue}>
+          입력
+        </button>
+      </div>
 
       <ul>
         {list.length > 0 &&

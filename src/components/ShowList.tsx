@@ -7,14 +7,14 @@ interface propsList {
 }
 
 const ShowList = (props: propsList) => {
-  const deleteValue = (): any => {
+  const deleteValue = (): void => {
     props.setList((el) => el.filter((element) => element.index !== props.data.index));
   };
 
   return (
-    <div>
-      <span onClick={deleteValue}>{props.data.value}</span>
-      <input type="checkbox" />
+    <div className="w-full pt-1">
+      <span className="inline-block w-4/5" onClick={deleteValue}>{props.data.value}</span>
+      <input className="w-1/5" type="checkbox" />
     </div>
   );
 };
