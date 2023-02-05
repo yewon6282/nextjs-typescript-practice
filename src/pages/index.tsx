@@ -10,17 +10,19 @@ const Home = () => {
     setMounted(true);
   }, []);
 
-  const [value, setValue] = useState<string>("");
-  const [countIndex, setCountIndex] = useState<number>(0);
   const [list, setList] = useRecoilState(listState);
+  const [value, setValue] = useState<string>("");
 
   const inputValue = (e: string): void => {
     setValue(e);
   };
 
   const addValue = (): void => {
-    setList([...list, { index: countIndex, value: value }]);
-    setCountIndex(countIndex + 1);
+    if (list.length > 0) {
+      setList([...list, { index: list[list.length - 1].index + 1, value: value }]);
+    } else {
+      setList([...list, { index: 0, value: value }]);
+    }
     setValue("");
   };
 
